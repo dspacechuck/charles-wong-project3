@@ -172,12 +172,22 @@ nav{
     /* border: 1px solid red; */
 }
 
+/* .addAStory::before{
+    content: "Add your story!";
+    font-size: 1.6rem;
+    padding: 20px;
+} */
+
 /* Hover State for "Add a Story" */
 .addAStory:hover{
     cursor: pointer;
     color: var(--dreamGreen);
     /* transform: rotateZ(90deg); */
 }
+
+/* .addAStory:hover .addAStory::before{
+    visibility: visible;
+} */
 
 /* NAV li formatting, including <a> tags and <a> hover state */
 nav li{
@@ -213,7 +223,12 @@ h1{
     font-family: 'Sacramento', cursive;
     font-size: 5rem;
     text-align: left;
+    /* transition: 0.7s all ease; */
 }
+
+/* h1:hover{
+    color: var(--sandyGreen);
+} */
 
 h2{
     font-size: 2rem;
