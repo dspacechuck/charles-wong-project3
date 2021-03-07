@@ -9,6 +9,28 @@ import Footer from './Footer.js';
 import { useState, useEffect } from 'react';
 
 function App() {
+
+  // Temp, storybook array, for testing
+  const myStoryArray = [];
+
+  // Initialize useState for our array of stories
+  const [storyArray, setStoryArray] = useState([]);
+
+  // // Initialize useState for story title input
+  // const [storyTitle, setStoryTitle] = useState("");
+
+  // // Initialize useState for story textarea input
+  // const [storyText, setStoryText] = useState("");
+
+  // // Event handler to handle submit form click
+  // const handleSubmitClick = (event) => {
+
+  //   event.preventDefault();
+
+  //   console.log(event.target.value);
+
+  // }
+
   return (
     <main className="App">
       <div className="wrapper">
@@ -16,13 +38,21 @@ function App() {
           <header>
             <h1>dreamingly</h1>
             <nav>
-              <label for="toggle">
+              <label htmlFor="toggle">
                 <div className="addAStory">+</div>
               </label>
               <input type="checkbox" id="toggle" name="toggle" />
+
+
               <div className="slideOutForm">
-                <AddAStoryForm />
+                <AddAStoryForm
+                // storyTitle={title}
+                // key={uniqueIndex}
+                // addNewStory={() => { handleSubmitClick(uniqueIndex) }}
+                />
               </div>
+
+
             </nav>
           </header>
         </div>

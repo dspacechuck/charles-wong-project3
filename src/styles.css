@@ -196,7 +196,7 @@ nav li{
 
 /* Styles for the Slideout menu links */
 
-nav input[type="checkbox"]:checked + .slideOutForm {
+nav input[type="checkbox"]:checked + .slideOutForm{
     right: 0;
 }
 nav input[type="checkbox"] {
