@@ -63,7 +63,7 @@ const AddAStoryForm = (props) => {
         // Slide form back to the right and out of view (this should go in App.js)
         // slideOutForm.style.right = "-100%";
 
-        // Push the new story as an object to our firebase database
+        // Push the new story as an storyObj to our firebase database
         dbRef.push(createStory);
 
         // Reset storyTitle and storyText states (and binded fields) to empty
@@ -80,10 +80,10 @@ const AddAStoryForm = (props) => {
 
         <form action="#" method="#" onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm wrapper">
             <label htmlFor="storyTitle" className="sr-only">Title</label>
-            <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" onChange={handleTitleChange} value={storyTitle}></input>
+            <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle}></input>
 
             <label htmlFor="yourStory" className="sr-only">Tell us your story below</label>
-            <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" onChange={handleTextChange} value={storyText}></textarea>
+            <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" required={true} onChange={handleTextChange} value={storyText}></textarea>
 
             <button type="submit">Post It!</button>
         </form>

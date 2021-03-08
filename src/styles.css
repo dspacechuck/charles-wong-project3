@@ -283,6 +283,7 @@ footer a:hover{
 .allStoriesSubContainer{
     display: flex;
     justify-content: space-around;
+    /* justify-content: space-evenly; */
     flex-wrap: wrap;
 
     /* height: calc(100vh - 138px); */
@@ -316,11 +317,12 @@ footer a:hover{
 }
 
 
+/* *****************IMPORTANT TO REPLICATE THIS "ACTIVE" BEHAVIOUR USING JS */
 /* Set article to 100% width and height on hover for ease of reading */
 /* Set this to the the on-click property in JS later*/
 /* Plus add wrapper classlist when active.  Remove when inactive */
-li:active{
-    /* transition: 0.7s all ease; */
+/* li:active{
+    
     cursor: pointer;
     position: absolute;
     width: 100%;
@@ -329,7 +331,7 @@ li:active{
     overflow: auto;
     opacity: 1;
     z-index: 700;
-}
+} */
 
 
 /* .allStories article:active .allStories{

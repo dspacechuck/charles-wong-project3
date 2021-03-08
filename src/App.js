@@ -16,20 +16,43 @@ function App() {
   // Initialize useState for our array of stories
   const [storyArray, setStoryArray] = useState([]);
 
-  // // Initialize useState for story title input
-  // const [storyTitle, setStoryTitle] = useState("");
+  // Define the useEffect hook.  Run it once when this component renders.
+  useEffect(() => {
 
-  // // Initialize useState for story textarea input
-  // const [storyText, setStoryText] = useState("");
+    // Cache our firebase database reference within a variable
+    const dbRef = firebase.database().ref();
 
-  // // Event handler to handle submit form click
-  // const handleSubmitClick = (event) => {
+    // Turn on firebase event listener using .on() method
+    dbRef.on('value', (data) => {
 
-  //   event.preventDefault();
+      // cache the firebase object in a variable named storyData
+      const storyData = data.val();
 
-  //   console.log(event.target.value);
+      // Create a storyCollection variable that will store all stories locally (for processing later)
+      const storyCollection = [];
 
-  // }
+      for (let storyKey in storyData) {
+        storyCollection.push({
+          firebaseKey: storyKey,
+          title: storyData[storyKey].title,
+          text: storyData[storyKey].text,
+          anonAuthor: storyData[storyKey].anonAuthor,
+          bgCol: storyData[storyKey].bgCol,
+          numLikes: storyData[storyKey].numLikes,
+          numDislikes: storyData[storyKey].numDislikes
+        });
+      }
+
+      // Log out the storyCollection object to see what's in our firebase database
+      console.log(storyCollection);
+
+      // Push the our story collection obtained from firebase into our local array "storyCollection"
+      setStoryArray(storyCollection);
+
+    })
+
+  }, []);
+
 
   return (
     <main className="App">
@@ -45,11 +68,7 @@ function App() {
 
 
               <div className="slideOutForm">
-                <AddAStoryForm
-                // storyTitle={title}
-                // key={uniqueIndex}
-                // addNewStory={() => { handleSubmitClick(uniqueIndex) }}
-                />
+                <AddAStoryForm />
               </div>
 
 
@@ -58,21 +77,13 @@ function App() {
         </div>
         <section className="allStories">
           <ul className="allStoriesSubContainer">
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
-            <EachStory />
+            {/* Map through our local storyArray obtained from firebase and render one <EachStory /> component per story on the page */}
+            {/*Pass each storyObj's properties as props into the EachStory component before receiving a formatted story to be rendered in our allStoriesSubContainer*/}
+            {storyArray.map((storyObj, storyIndex) => {
+              return (
+                <EachStory key={storyObj.firebaseKey} title={storyObj.title} text={storyObj.text} likesCount={storyObj.numLikes} dislikesCount={storyObj.numDislikes} />
+              )
+            })}
           </ul>
         </section>
       </div>
