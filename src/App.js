@@ -1,18 +1,15 @@
-// import './App.css';
-// import MainSection from './MainPage.js';
-import reactDom from 'react-dom';
+// import reactDom from 'react-dom';
 import './styles.css';
 import firebase from './firebase.js';
-import AddAStoryForm from './AddAStoryForm.js';
+import AddAStoryForm from './UserStoryForm.js';
 import EachStory from './EachStory.js';
 import Footer from './Footer.js';
 import { useState, useEffect } from 'react';
 
 function App() {
 
-  // Temp, storybook array, for testing
-  const myStoryArray = [];
-
+  // retrieve stories from firebase and save them locally for processing
+  // updates our local stories array when there are any changes to the firebase database
   // Initialize useState for our array of stories
   const [storyArray, setStoryArray] = useState([]);
 
@@ -53,6 +50,57 @@ function App() {
 
   }, []);
 
+  // Function to handle likes click
+  const handleLikesDislikesClick = (e, fireBaseKey, uniqueIndex, isLikes = true) => {
+    // console.log("event", event);
+
+    // Cache our firebase database reference within a variable
+    const dbRef = firebase.database().ref();
+    console.log("likes/dislikes clicked");
+
+    // create a copy of the story array while performing operations on it
+    const copyOfStoryArray = [...storyArray];
+
+    // increase the likes or dislikes count on the specific story whose star or x was clicked on accordingly
+    if (isLikes) {
+      copyOfStoryArray[uniqueIndex].numLikes++;
+    } else {
+      copyOfStoryArray[uniqueIndex].numDislikes++;
+    }
+
+    console.log(copyOfStoryArray[uniqueIndex]);
+
+    // Update the storyArray state with this new array where the star was clicked on for the story of interest
+    setStoryArray(copyOfStoryArray);
+
+    // Update only the current index in firebase with the corresponding local index in copyOfStoryArray 
+    dbRef.child(fireBaseKey).set(copyOfStoryArray[uniqueIndex]);
+
+    // Log out the updated index in our firebase database
+    console.log(dbRef.child(fireBaseKey));
+
+    // EachStory.disableIcon(e);
+
+    // // Helper function to disable clicked icon for currrent session (prevents multiple up or downvotes)
+    // const disableIcon = () => {
+    //   console.log(e.target);
+    //   if (isLikes) {
+    //     e.target.style.color = "var(--mustard)";
+    //   } else {
+    //     e.target.style.color = "var(--dreamPink)";
+    //   }   
+    // }
+
+    // // Invoke the helper function to disable the clicked-on icon
+    // disableIcon();
+
+  }
+
+  // Function to disable the current likes or dislikes icon after clicking on them
+  // const handleIconClick = (e) => {
+  //   console.log("event", e);
+  //   console.log("icon click");
+  // }
 
   return (
     <main className="App">
@@ -66,11 +114,9 @@ function App() {
               </label>
               <input type="checkbox" id="toggle" name="toggle" />
 
-
               <div className="slideOutForm">
                 <AddAStoryForm />
               </div>
-
 
             </nav>
           </header>
@@ -81,7 +127,21 @@ function App() {
             {/*Pass each storyObj's properties as props into the EachStory component before receiving a formatted story to be rendered in our allStoriesSubContainer*/}
             {storyArray.map((storyObj, storyIndex) => {
               return (
-                <EachStory key={storyObj.firebaseKey} title={storyObj.title} text={storyObj.text} likesCount={storyObj.numLikes} dislikesCount={storyObj.numDislikes} />
+                <EachStory
+                  key={storyObj.firebaseKey}
+                  title={storyObj.title}
+                  text={storyObj.text}
+                  likesCount={storyObj.numLikes}
+                  dislikesCount={storyObj.numDislikes}
+                  increaseLikesFunction={(event) => {
+                    handleLikesDislikesClick(event, storyObj.firebaseKey, storyIndex, true)
+
+                  }}
+                  increaseDislikesFunction={(event) => {
+                    handleLikesDislikesClick(event, storyObj.firebaseKey, storyIndex, false)
+
+                  }
+                  } />
               )
             })}
           </ul>

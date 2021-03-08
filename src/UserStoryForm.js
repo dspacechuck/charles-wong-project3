@@ -1,4 +1,4 @@
-// AddAStoryForm.js
+// UserStoryForm.js
 import reactDom from 'react-dom';
 import './styles.css';
 import firebase from './firebase.js';
@@ -23,8 +23,6 @@ const AddAStoryForm = (props) => {
 
     // Create a reference to the firebase database
     const dbRef = firebase.database().ref();
-
-
 
     // Initialize useState for story title input
     const [storyTitle, setStoryTitle] = useState("");

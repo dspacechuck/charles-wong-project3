@@ -22,13 +22,24 @@ const EachStory = (props) => {
     // onClick={handleStarUp}
     // onClick={handleDislikeUp}
 
+    // Helper function to disable the clicked icon
+    // const disableIcon = (props) => {
+    //     console.log(props);
+    //     // if (isLikes) {
+    //     //     props.target.style.color = "var(--mustard)";
+    //     // } else {
+    //     //     props.target.style.color = "var(--dreamPink)";
+    //     // }
+
+    // }
+
     return (
 
         <li>
             <article>
                 <div className="stats">
-                    <div className="star"><span className="starLogo">★</span><span className="likesCount">{props.likesCount}</span></div>
-                    <div className="dislikes"><span className="xLogo">x</span><span className="dislikesCount">{props.dislikesCount}</span></div>
+                    <div className="star"><span className="starLogo" onClick={props.increaseLikesFunction}>★</span><span className="likesCount">{props.likesCount}</span></div>
+                    <div className="dislikes"><span className="xLogo" onClick={props.increaseDislikesFunction}>x</span><span className="dislikesCount">{props.dislikesCount}</span></div>
                 </div>
                 <h2>{props.title}</h2>
                 {/* <h3>Author</h3> */}

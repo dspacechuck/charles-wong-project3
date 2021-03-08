@@ -1,1 +1,0 @@
-// Stores array of stories
