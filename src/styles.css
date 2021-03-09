@@ -510,4 +510,16 @@ footer a:hover{
     text-align: center;
 } */
 
+/* Media Queries */
 
+@media(max-width: 800px){
+    .wrapper{
+        width: 100%;
+    }
+
+    header, 
+    footer h3{
+        width: 90%;
+        margin: 0 auto;
+    }
+}
