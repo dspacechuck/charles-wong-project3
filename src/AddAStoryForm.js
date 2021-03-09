@@ -44,14 +44,10 @@ const AddAStoryForm = (props) => {
     // Initialize useEffect hook to track all changes to myForm useState
     useEffect(() => {
 
-        console.log(formSubmitState);
-
     }, [formSubmitState]);
-
 
     const handleTitleChange = (event) => {
         setStoryTitle(event.target.value);
-
     }
 
     const handleTextChange = (event) => {
@@ -61,7 +57,6 @@ const AddAStoryForm = (props) => {
     // Toggles slideOut Menu on screen or off-screen
     const toggleMenu = () => {
         navCheckBox.checked = !navCheckBox.checked;
-        // console.log(navCheckBox);
     }
 
     // Define form handleSubmit handler
@@ -70,15 +65,11 @@ const AddAStoryForm = (props) => {
         event.preventDefault();
         console.log("submit click detected");
 
-        // set the form's submitted state to true
+        // Set the form's submitted state to true
         setFormSubmitState(true);
 
-        // setFormState
-
         console.log(document.querySelector('form'));
-        // document.querySelector('form').style.display = "none";
 
-        // if (isStoryValid()) {
         // Create a new story using the storyObj class
         const createStory = new storyObj(storyTitle, storyText);
         console.log(createStory);
@@ -97,17 +88,12 @@ const AddAStoryForm = (props) => {
         setStoryTitle("");
         setStoryText("");
 
-        // changeFormState(false);
-        // navCheckBox.disabled = "true";
-
         setTimeout(() => {
             // Toggles the slideOutMenu on/off 
             toggleMenu();
         }, 1500)
 
         setTimeout(() => {
-            // navCheckBox.disabled = "false";
-            // document.querySelector('form').style.display = "flex";
             setFormSubmitState(false);
         }, 2000);
 
@@ -115,27 +101,29 @@ const AddAStoryForm = (props) => {
 
     return (
         <div className="slideOutForm">
-            <form action="#" method="#"
-                onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm wrapper">
+            {
+                // If the form has just been submitted (formSubmitState = true), show the user a Thank you message instead of a form
+                formSubmitState
+                    ? <h2 className="submitSuccessful">Thank you for submitting your story!</h2>
+                    : <form action="#" method="#"
+                        onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm wrapper">
+                        <label htmlFor="storyTitle" className="sr-only">Title</label>
+                        <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle}></input>
+
+                        <label htmlFor="yourStory" className="sr-only">Tell us your story below</label>
+                        <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" required={true} onChange={handleTextChange} value={storyText} minLength="10"></textarea>
+
+                        <button type="submit">Post It!</button>
+                    </form>
 
 
-                <label htmlFor="storyTitle" className="sr-only">Title</label>
-                <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle}></input>
 
-                <label htmlFor="yourStory" className="sr-only">Tell us your story below</label>
-                <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" required={true} onChange={handleTextChange} value={storyText} minLength="10"></textarea>
+            }
 
-                <button type="submit">
-                    {
-                        formSubmitState
-                            ? "Thank You!"
-                            : "Post It!"
-                    }
-                </button>
-            </form>
         </div>
     )
 
 }
 
 export default AddAStoryForm;
+

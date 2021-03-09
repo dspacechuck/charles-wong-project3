@@ -1,10 +1,46 @@
 // EachStory.js
 // Stores the component for each story that is rendered on the page.
 import './styles.css';
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 const EachStory = (props) => {
 
+    // const selectedStory = document.querySelector('li');
+    const selectedStory = document.querySelector('li');
+    const selectedStoryInner = document.querySelector('article');
 
+    // Initialize useState hook to get and set maximized state of a story
+    const [maxStory, setMaxStory] = useState(false);
+
+
+
+    // console.log(maxStory);
+
+    useEffect(() => {
+    }, [maxStory]);
+
+    // Function to handle increasing likes 
+    const handleVoteUpFunction = () => {
+
+
+
+    }
+
+    // Function to maximize each story upon clicking on it
+    const handleMaximizeStory = () => {
+        // setMaxStory(true);
+        console.log(maxStory);
+        setMaxStory(!maxStory);
+        console.log(selectedStory);
+
+        // selectedStory.style.width = "1000px";
+        // selectedStory.style.height = "1000px";
+
+        selectedStory.classList.toggle("activeLi");
+
+        selectedStoryInner.classList.add("wrapper");
+    }
 
 
     // let props = tempVar;
@@ -38,9 +74,17 @@ const EachStory = (props) => {
 
     return (
 
-        <li>
+        <li onClick={handleMaximizeStory}>
             <article>
                 <div className="stats">
+                    {/* <div className="star">
+                        <span className="starLogo" onClick={handleVoteUpFunction}>★</span>
+                        <span className="likesCount">{props.likesCount}</span>
+                    </div>
+                    <div className="dislikes">
+                        <span className="xLogo" onClick={props.increaseDislikesFunction}>x</span>
+                        <span className="dislikesCount">{props.dislikesCount}</span>
+                    </div> */}
                     <div className="star">
                         <span className="starLogo" onClick={props.increaseLikesFunction}>★</span>
                         <span className="likesCount">{props.likesCount}</span>
@@ -59,6 +103,8 @@ const EachStory = (props) => {
                 </div>
             </article>
         </li>
+
+
 
     )
 
