@@ -82,7 +82,7 @@ const AddAStoryForm = (props) => {
         console.log(storyText.length);
 
         // // Push the new story as an storyObj to our firebase database
-        // dbRef.push(createStory);
+        dbRef.push(createStory);
 
         // Reset storyTitle and storyText states (and binded fields) to empty
         setStoryTitle("");
