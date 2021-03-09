@@ -1,7 +1,8 @@
 // import reactDom from 'react-dom';
 import './styles.css';
+import React from 'react';
 import firebase from './firebase.js';
-import AddAStoryForm from './UserStoryForm.js';
+import AddAStoryForm from './AddAStoryForm.js';
 import EachStory from './EachStory.js';
 import Footer from './Footer.js';
 import { useState, useEffect } from 'react';

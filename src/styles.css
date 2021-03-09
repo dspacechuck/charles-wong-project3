@@ -76,11 +76,7 @@ header{
 }
 
 
-/* .addAStoryContainer{
-    display: flex;
-    padding: 30px 50px;
-    color: var(--mustard);
-} */
+
 
 
 /* General formatting for all unordered lists */
@@ -90,14 +86,6 @@ ul{
 
 /* All hamburger menu items go here */
 
- /* NAV formatting */
-nav{
-    /* padding-top: 25px; */
-    /* display: flex; */
-    /* justify-content: flex-end; */
-    /* align-items: center; */
-    /* Set slideout menu to appear in front of all elements */
-}
 
 /* NAV UL formatting */
 .slideOutForm{
@@ -141,6 +129,7 @@ nav{
     border: none;
     border-radius: 7px;
     padding: 10px;
+    box-shadow: none;
 }
 
 .slideOutForm textarea{
@@ -149,12 +138,60 @@ nav{
     min-height: 350px;
 }
 
+.slideOutForm textarea,
+.slideOutForm input{
+    transition: 0.7s border-left ease;
+    color: var(--twilightPurple);
+}
+
 .slideOutForm button{
     color: var(--paleMoon);
  
     background: var(--oceanBlue);
     /* border-bottom: 7px solid var(--sandyGreen); */
     transition: 1.0s all ease;
+}
+
+/* .slideOutForm textarea:focus{
+    border-left: 15px solid var(--dreamPink);
+} */
+
+.slideOutForm:focus-within input:invalid, 
+.slideOutForm:focus-within textarea:invalid{
+    /* border-color: var(--dreamPink); */
+    border-left: 15px solid var(--dreamPink);
+    outline:none;
+    box-shadow: none;
+}
+
+.slideOutForm:focus-within input:valid, 
+.slideOutForm:focus-within textarea:valid{
+    border-left: 15px solid var(--oceanBlue);
+    outline:none;
+    box-shadow: none;
+}
+.slideOutForm *:focus{
+    outline: none;
+}
+
+/* .slideOutForm button:focus{
+    outline:none;   
+    border-left: 15px solid var(--dreamGreen);
+    border-right: 15px solid var(--dreamGreen);
+} */
+
+.slideOutForm:focus-within input:focus, 
+.slideOutForm:focus-within textarea:focus{
+    /* border-left: 15px solid var(--green); */
+    /* background: var(--paleMoon); */
+    border-width: 40px;
+    /* border-right: 15px solid var(--paleMoon); */
+    /* opacity: 1; */
+}
+
+/* For use by JS to toggle border-left to be ON or OFF */
+.borderLeftOn{
+    border-left-width: 15px;
 }
 
 .slideOutForm button:hover{
@@ -172,11 +209,6 @@ nav{
     /* border: 1px solid red; */
 }
 
-/* .addAStory::before{
-    content: "Add your story!";
-    font-size: 1.6rem;
-    padding: 20px;
-} */
 
 /* Hover State for "Add a Story" */
 .addAStory:hover{
@@ -189,11 +221,6 @@ nav{
     visibility: visible;
 } */
 
-/* NAV li formatting, including <a> tags and <a> hover state */
-nav li{
-
-}
-
 /* Styles for the Slideout menu links */
 
 nav input[type="checkbox"]:checked + .slideOutForm{
@@ -202,14 +229,9 @@ nav input[type="checkbox"]:checked + .slideOutForm{
 nav input[type="checkbox"] {
     visibility: hidden;
 }
-nav label[for="toggle"] {
-    /* position: fixed; */
-    /* color: white; */
-    /* top: 20px;
-    left: 20px;
-    z-index: 15;
-    cursor: pointer; */
-}          
+/* nav label[for="toggle"] {
+  
+}           */
 /* End of hamburger menu section */
 
 h1{

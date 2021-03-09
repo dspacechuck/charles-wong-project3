@@ -4,6 +4,9 @@ import './styles.css';
 
 const EachStory = (props) => {
 
+
+
+
     // let props = tempVar;
     // // Event handler to handle adding a star to a story
     // const handleStarUp = () => {
@@ -38,8 +41,14 @@ const EachStory = (props) => {
         <li>
             <article>
                 <div className="stats">
-                    <div className="star"><span className="starLogo" onClick={props.increaseLikesFunction}>★</span><span className="likesCount">{props.likesCount}</span></div>
-                    <div className="dislikes"><span className="xLogo" onClick={props.increaseDislikesFunction}>x</span><span className="dislikesCount">{props.dislikesCount}</span></div>
+                    <div className="star">
+                        <span className="starLogo" onClick={props.increaseLikesFunction}>★</span>
+                        <span className="likesCount">{props.likesCount}</span>
+                    </div>
+                    <div className="dislikes">
+                        <span className="xLogo" onClick={props.increaseDislikesFunction}>x</span>
+                        <span className="dislikesCount">{props.dislikesCount}</span>
+                    </div>
                 </div>
                 <h2>{props.title}</h2>
                 {/* <h3>Author</h3> */}
