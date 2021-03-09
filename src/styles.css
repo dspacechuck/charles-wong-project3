@@ -300,6 +300,11 @@ footer a:hover{
     color: var(--paleMoon);
 }
 
+/* Formatting for scrollbar in slideOutForm textarea */
+.slideOutForm textarea
+{
+    scrollbar-color: var(--oceanBlue) var(--twilightPurple);
+}
 
 /* Sub-container to house all stories */
 .allStoriesSubContainer{

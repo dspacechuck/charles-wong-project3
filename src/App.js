@@ -97,6 +97,11 @@ function App() {
 
   }
 
+  // const handleFormSubmitted = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form submitted", e);
+  // }
+
   // Function to disable the current likes or dislikes icon after clicking on them
   // const handleIconClick = (e) => {
   //   console.log("event", e);
@@ -115,9 +120,10 @@ function App() {
               </label>
               <input type="checkbox" id="toggle" name="toggle" />
 
-              <div className="slideOutForm">
-                <AddAStoryForm />
-              </div>
+              {/* <div className="slideOutForm"> */}
+              <AddAStoryForm />
+
+              {/* </div> */}
 
             </nav>
           </header>
