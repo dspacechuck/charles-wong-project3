@@ -19,7 +19,16 @@ const EachStory = (props) => {
 
     // console.log(maxStory);
 
+    // useEffect(() => {
+    //     setMaxStory(true);
+    //     console.log(maxStory);
+
+    // }, [!maxStory]);
+
     useEffect(() => {
+        // setMaxStory(true);
+        console.log(maxStory);
+
     }, [maxStory]);
 
     // Function to handle increasing likes 
@@ -33,68 +42,41 @@ const EachStory = (props) => {
     const handleMaximizeStory = (e) => {
         // setMaxStory(true);
         console.log("maximized Story clicked");
-
-
-        // console.log(selectedStory);
+        setMaxStory(true);
 
         const selectedStory = e.target.parentNode;
         const selectedStoryInner = e.target.parentNode.childNodes[0];
 
-
         console.log(e.target);
-
-        // console.log(e);
-
-        // console.log(e.target.parentNode.parentNode);
-
-        // selectedStory.style.width = "1000px";
-        // selectedStory.style.height = "1000px";
 
         selectedStory.classList.toggle("activeLi");
         selectedStoryInner.classList.toggle("wrapper");
-
-        setMaxStory(!maxStory);
-        console.log(maxStory);
     }
 
-    // Function to hide "read more" button on story maximize
-    const readMoreBtn = () => {
-
+    // Function to minimize each story upon clickin on the minimize button
+    const handleMinimizeStory = (e) => {
+        console.log("minimze Story clicked");
+        setMaxStory(false);
+        console.log(e.target);
+        e.target.parentNode.parentNode.parentNode.classList.toggle("activeLi");
+        e.target.parentNode.parentNode.classList.toggle("wrapper");
     }
 
-    // let props = tempVar;
-    // // Event handler to handle adding a star to a story
-    // const handleStarUp = () => {
-    //     console.log(tempVar);
-    //     props.likesCount++;
-    //     console.log(tempVar.likesCount);
-    // }
 
-    // // Event handler to handle adding a dislike to a story
-    // const handleDislikeUp = () => {
-    //     console.log(tempVar);
-    //     props.dislikesCount++;
-    //     console.log(tempVar.dislikesCount);
-    // }
-
-    // onClick={handleStarUp}
-    // onClick={handleDislikeUp}
-
-    // Helper function to disable the clicked icon
-    // const disableIcon = (props) => {
-    //     console.log(props);
-    //     // if (isLikes) {
-    //     //     props.target.style.color = "var(--mustard)";
-    //     // } else {
-    //     //     props.target.style.color = "var(--dreamPink)";
-    //     // }
-
-    // }
 
     return (
 
         <li>
             <article>
+                {
+                    // Only show the "close story button after maximizing any story"
+                    maxStory
+                        ? <div className="titleBar">
+                            <button className="minimizeBtn" onClick={(event) => { handleMinimizeStory(event) }}>x</button>
+                        </div>
+
+                        : null
+                }
                 <div className="stats">
                     {/* <div className="star">
                         <span className="starLogo" onClick={handleVoteUpFunction}>★</span>
@@ -122,7 +104,13 @@ const EachStory = (props) => {
                 </div>
             </article>
             {/* <button onClick={(event) => { handleMaximizeStory(event) }}>Read More</button> */}
-            <button onClick={(event) => { handleMaximizeStory(event) }}>Read More</button>
+            {
+                // Only show the "read more button before maximizing any story"
+                maxStory
+                    ? null
+                    : <button className="readMore" onClick={(event) => { handleMaximizeStory(event) }}>Read More</button>
+            }
+
         </li>
 
 

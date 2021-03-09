@@ -29,6 +29,7 @@ html{
     --oceanBlue: #0C549A;
     --nightSkyBlue: #1B3E83;
     --twilightPurple: #28184C;
+    --slateGrey: #3b3939;
     --dreamPink: #a55c7a;
     --dreamGreen: #0f726d;
     --mustard: #8C6E16;
@@ -324,7 +325,7 @@ footer a:hover{
     /* height: calc(100vh - 138px); */
     height: calc(100vh - 250px);
     padding-right: 10px;
-    scrollbar-color: var(--paleMoon) var(--twilightPurple);
+    scrollbar-color: var(--oceanBlue) var(--twilightPurple);
     /* border: 3px solid pink; */
     overflow-y: auto;
     /* position: relative; */
@@ -362,7 +363,7 @@ footer a:hover{
 }
 
 /* Create a button overlay on top of the current story. This is used as an accurate target for click events to register the correct parent article and to maximize it */
-li button{
+.readMore{
     /* display: none; */
     border: none;
     width: 100%;
@@ -378,7 +379,7 @@ li button{
 }
 
 /* Renders an overlay "read more" button visible on hover over the li */
-.allStoriesSubContainer li:hover button{
+.allStoriesSubContainer li:hover .readMore{
     cursor: pointer;
     display: block;
     opacity: 0.9;
@@ -386,7 +387,7 @@ li button{
 }
 
 /* Change the background color on the "read more" button hover */
-li button:hover{
+.readMore:hover{
     /* background: var(--twilightPurple); */
     /* height: 40%; */
     opacity: 1;
@@ -409,6 +410,31 @@ li button:hover{
     opacity: 1;
     z-index: 100;
     /* border: 5px solid green; */
+}
+
+.titleBar{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Styling properties for the minimize button*/
+.minimizeBtn{
+    font-size: 1.3rem;
+    font-family: 'Quicksand', sans-serif;
+    padding: 5px 15px 10px;
+    border: 3px solid transparent;
+    /* border: 1px solid var(--grey); */
+    color: var(--white);
+    /* border-radius: 3px; */
+    background: var(--slateGrey);
+    text-align: center;
+    transition: 0.7s all ease;
+}
+
+.minimizeBtn:hover{
+    background: var(--mustard);
+    cursor: pointer;
+    border-bottom-color: var(--slateGrey);
 }
 
 
