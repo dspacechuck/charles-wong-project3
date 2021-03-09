@@ -339,6 +339,8 @@ footer a:hover{
 
 /* Styling for each story's container */
 .allStoriesSubContainer li{
+    position: relative;
+
     flex: 0 0 300px;
     padding: 15px;
     margin: 0 20px 20px;
@@ -355,8 +357,46 @@ footer a:hover{
 }
 
 .allStoriesSubContainer li:hover{
-    cursor: pointer;
+    /* cursor: pointer; */
     opacity: 1;
+}
+
+/* Create a button overlay on top of the current story. This is used as an accurate target for click events to register the correct parent article and to maximize it */
+li button{
+    /* display: none; */
+    border: none;
+    width: 100%;
+    height: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: var(--mustard);
+    color: white;
+    font-size: 1.3rem;
+    font-family: 'Quicksand', sans-serif;
+    transition: 1s all ease;
+}
+
+/* Renders an overlay "read more" button visible on hover over the li */
+.allStoriesSubContainer li:hover button{
+    cursor: pointer;
+    display: block;
+    opacity: 0.9;
+    height: 62%;
+}
+
+/* Change the background color on the "read more" button hover */
+li button:hover{
+    /* background: var(--twilightPurple); */
+    /* height: 40%; */
+    opacity: 1;
+    /* padding-left: 20%; */
+    letter-spacing: 0.3rem;
+    /* height: 50%; */
+    /* padding-bottom: 20px; */
+    height: auto;
+    /* padding-top:100px;
+    padding-bottom: 50px; */
 }
 
 /* Class for React to toggle to enable story to maximize on click */

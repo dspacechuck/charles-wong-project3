@@ -146,9 +146,12 @@ function App() {
                   }}
                   increaseDislikesFunction={(event) => {
                     handleLikesDislikesClick(event, storyObj.firebaseKey, storyIndex, false)
+                  }}
+                // maximizeStory={(event) => {
+                //   handleMaxStory(event, storyObj.firebaseKey, storyIndex)
+                // }}
 
-                  }
-                  } />
+                />
               )
             })}
           </ul>

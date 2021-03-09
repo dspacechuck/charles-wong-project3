@@ -1,14 +1,16 @@
 // EachStory.js
 // Stores the component for each story that is rendered on the page.
-import './styles.css';
+import reactDom from 'react-dom';
 import React from 'react';
+import './styles.css';
+
 import { useState, useEffect } from 'react';
 
 const EachStory = (props) => {
 
     // const selectedStory = document.querySelector('li');
-    const selectedStory = document.querySelector('li');
-    const selectedStoryInner = document.querySelector('article');
+    // const selectedStory = document.querySelector('li');
+    // const selectedStoryInner = document.querySelector('article');
 
     // Initialize useState hook to get and set maximized state of a story
     const [maxStory, setMaxStory] = useState(false);
@@ -28,20 +30,37 @@ const EachStory = (props) => {
     }
 
     // Function to maximize each story upon clicking on it
-    const handleMaximizeStory = () => {
+    const handleMaximizeStory = (e) => {
         // setMaxStory(true);
-        console.log(maxStory);
-        setMaxStory(!maxStory);
-        console.log(selectedStory);
+        console.log("maximized Story clicked");
+
+
+        // console.log(selectedStory);
+
+        const selectedStory = e.target.parentNode;
+        const selectedStoryInner = e.target.parentNode.childNodes[0];
+
+
+        console.log(e.target);
+
+        // console.log(e);
+
+        // console.log(e.target.parentNode.parentNode);
 
         // selectedStory.style.width = "1000px";
         // selectedStory.style.height = "1000px";
 
         selectedStory.classList.toggle("activeLi");
+        selectedStoryInner.classList.toggle("wrapper");
 
-        selectedStoryInner.classList.add("wrapper");
+        setMaxStory(!maxStory);
+        console.log(maxStory);
     }
 
+    // Function to hide "read more" button on story maximize
+    const readMoreBtn = () => {
+
+    }
 
     // let props = tempVar;
     // // Event handler to handle adding a star to a story
@@ -74,7 +93,7 @@ const EachStory = (props) => {
 
     return (
 
-        <li onClick={handleMaximizeStory}>
+        <li>
             <article>
                 <div className="stats">
                     {/* <div className="star">
@@ -102,6 +121,8 @@ const EachStory = (props) => {
                     </p>
                 </div>
             </article>
+            {/* <button onClick={(event) => { handleMaximizeStory(event) }}>Read More</button> */}
+            <button onClick={(event) => { handleMaximizeStory(event) }}>Read More</button>
         </li>
 
 
