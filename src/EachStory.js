@@ -1,109 +1,113 @@
 // EachStory.js
-// Stores the component for each story that is rendered on the page.
-import reactDom from 'react-dom';
+// Component to store details of each story that is rendered on the page.
 import React from 'react';
 import './styles.css';
-
 import { useState, useEffect } from 'react';
 
 const EachStory = (props) => {
-
-    // const selectedStory = document.querySelector('li');
-    // const selectedStory = document.querySelector('li');
-    // const selectedStoryInner = document.querySelector('article');
+    const { updateVote } = props;
 
     // Initialize useState hook to get and set maximized state of a story
     const [maxStory, setMaxStory] = useState(false);
 
-
-
-    // console.log(maxStory);
-
-    // useEffect(() => {
-    //     setMaxStory(true);
-    //     console.log(maxStory);
-
-    // }, [!maxStory]);
-
+    // This hook is only used to check the state of maxStory accurately (due to async function)
     useEffect(() => {
-        // setMaxStory(true);
         console.log(maxStory);
 
     }, [maxStory]);
 
-    // Function to handle increasing likes 
-    const handleVoteUpFunction = () => {
+    // Function to handle adding/removing a like, including toggling between voted/non-voted color styling on the star
+    const handleLikeVoteFunction = (e) => {
 
+        console.log(e);
+        console.log(e.target.classList.length);
 
-
+        // If the logo's color is not set, upvote the story
+        if (e.target.classList.length === 1) {
+            updateVote(props.storyObj.firebaseKey, props.localIndex, "numLikes", props.storyObj.numLikes + 1);
+        }
+        // If the target's color is already set (only possible from previous clicks), then decrenent the like count
+        else {
+            updateVote(props.storyObj.firebaseKey, props.localIndex, "numLikes", props.storyObj.numLikes - 1);
+        }
+        // Toggle the star's color 
+        e.target.classList.toggle("starClicked");
     }
 
-    // Function to maximize each story upon clicking on it
+    // Function to handle adding/removing a dislike, including toggling between voted/non-voted color styling on the x
+    const handleDislikeVoteFunction = (e) => {
+
+        console.log(props.storyObj);
+        console.log(e);
+
+        // If the logo's color is not set, upvote the story
+        if (e.target.classList.length === 1) {
+            updateVote(props.storyObj.firebaseKey, props.localIndex, "numDislikes", props.storyObj.numDislikes + 1);
+        }
+        // If the target's color is already set (only possible from previous clicks), then decrenent the like count
+        else {
+            updateVote(props.storyObj.firebaseKey, props.localIndex, "numDislikes", props.storyObj.numDislikes - 1);
+        }
+
+        // Toggle the x's color 
+        e.target.classList.toggle("xClicked");
+    }
+
+    // Function to maximize each story upon clicking on it, including adding a wrapper and updating the state of the maxStory array (useState)
     const handleMaximizeStory = (e) => {
-        // setMaxStory(true);
-        console.log("maximized Story clicked");
+
         setMaxStory(true);
 
         const selectedStory = e.target.parentNode;
         const selectedStoryInner = e.target.parentNode.childNodes[0];
 
-        console.log(e.target);
+        selectedStory.classList.toggle("activeLi");
+        selectedStoryInner.classList.toggle("wrapper");
+    }
+
+    // Function to minimize each story upon clickin on the minimize button, including removing the wrapper on it and updating the state of the maxStory array (useState)
+    const handleMinimizeStory = (e) => {
+
+        setMaxStory(false);
+
+        const selectedStory = e.target.parentNode.parentNode.parentNode;
+        const selectedStoryInner = e.target.parentNode.parentNode;
 
         selectedStory.classList.toggle("activeLi");
         selectedStoryInner.classList.toggle("wrapper");
     }
 
-    // Function to minimize each story upon clickin on the minimize button
-    const handleMinimizeStory = (e) => {
-        console.log("minimze Story clicked");
-        setMaxStory(false);
-        console.log(e.target);
-        e.target.parentNode.parentNode.parentNode.classList.toggle("activeLi");
-        e.target.parentNode.parentNode.classList.toggle("wrapper");
-    }
-
-
-
     return (
 
         <li>
+            {/* // Only show the "close story button after maximizing any story" */}
             <article>
                 {
-                    // Only show the "close story button after maximizing any story"
                     maxStory
                         ? <div className="titleBar">
                             <button className="minimizeBtn" onClick={(event) => { handleMinimizeStory(event) }}>x</button>
                         </div>
-
                         : null
                 }
                 <div className="stats">
-                    {/* <div className="star">
-                        <span className="starLogo" onClick={handleVoteUpFunction}>★</span>
-                        <span className="likesCount">{props.likesCount}</span>
-                    </div>
-                    <div className="dislikes">
-                        <span className="xLogo" onClick={props.increaseDislikesFunction}>x</span>
-                        <span className="dislikesCount">{props.dislikesCount}</span>
-                    </div> */}
                     <div className="star">
-                        <span className="starLogo" onClick={props.increaseLikesFunction}>★</span>
-                        <span className="likesCount">{props.likesCount}</span>
+                        <span className="starLogo" onClick={(event) => { handleLikeVoteFunction(event) }}>★</span>
+                        <span className="likesCount">{props.storyObj.numLikes}</span>
                     </div>
                     <div className="dislikes">
-                        <span className="xLogo" onClick={props.increaseDislikesFunction}>x</span>
-                        <span className="dislikesCount">{props.dislikesCount}</span>
+                        <span className="xLogo" onClick={(event) => { handleDislikeVoteFunction(event) }}>x</span>
+                        <span className="dislikesCount">{props.storyObj.numDislikes}</span>
                     </div>
                 </div>
-                <h2>{props.title}</h2>
+                <h2>{props.storyObj.title}</h2>
                 {/* <h3>Author</h3> */}
                 <div className="fullStory">
                     <p>
-                        {props.text}
+                        {props.storyObj.text}
                     </p>
                 </div>
             </article>
-            {/* <button onClick={(event) => { handleMaximizeStory(event) }}>Read More</button> */}
+
             {
                 // Only show the "read more button before maximizing any story"
                 maxStory
@@ -112,8 +116,6 @@ const EachStory = (props) => {
             }
 
         </li>
-
-
 
     )
 
