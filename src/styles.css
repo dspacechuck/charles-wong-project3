@@ -45,12 +45,8 @@ html{
 /* Define general properties for body */
 body{
     background: var(--twilightPurple) url(./assets/landscapeTwilightSvg.svg) no-repeat fixed;
-
     background-size: cover;
-
     overflow-y: hidden;
-
-    /* font-family: Arial, Helvetica, sans-serif; */
     font-family: 'Quicksand', sans-serif;
     font-size: 62.5%;
     color: var(--white);
@@ -77,10 +73,6 @@ header{
     position: relative;
 }
 
-
-
-
-
 /* General formatting for all unordered lists */
 ul{
     list-style-type: none;
@@ -88,39 +80,31 @@ ul{
 
 /* All hamburger menu items go here */
 
-
 /* NAV UL formatting */
 .slideOutForm{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
     z-index: 30;
     position: fixed;
-    /* position: fixed; */
     top: 150px;
     right: -100%;
-    /* bottom: -100%; */
-    width: 100%;
+     width: 100%;
     margin: 0 auto;
     height: calc(100vh - 150px);
     z-index: 500;
     transition: all 0.7s ease;
-    /* background: purple; */
     background: var(--twilightPurple);
     color: var(--paleMoon);
     font-size: 2rem;
     overflow-y: auto;
-    /* opacity: 0.85; */
 }
 
 /* Formatting for the form section within the slideOutForm class */
 .slideOutForm form{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     padding: 30px;
-    /* border-top: 3px solid green; */
 }
 
 .slideOutForm input, 
@@ -154,10 +138,6 @@ ul{
     transition: 1.0s all ease;
 }
 
-/* .slideOutForm textarea:focus{
-    border-left: 15px solid var(--dreamPink);
-} */
-
 .slideOutForm:focus-within input:invalid, 
 .slideOutForm:focus-within textarea:invalid{
     /* border-color: var(--dreamPink); */
@@ -176,19 +156,9 @@ ul{
     outline: none;
 }
 
-/* .slideOutForm button:focus{
-    outline:none;   
-    border-left: 15px solid var(--dreamGreen);
-    border-right: 15px solid var(--dreamGreen);
-} */
-
 .slideOutForm:focus-within input:focus, 
 .slideOutForm:focus-within textarea:focus{
-    /* border-left: 15px solid var(--green); */
-    /* background: var(--paleMoon); */
     border-width: 40px;
-    /* border-right: 15px solid var(--paleMoon); */
-    /* opacity: 1; */
 }
 
 /* For use by JS to toggle border-left to be ON or OFF */
@@ -219,17 +189,12 @@ ul{
     /* border: 1px solid red; */
 }
 
-
 /* Hover State for "Add a Story" */
 .addAStory:hover{
     cursor: pointer;
     color: var(--dreamGreen);
     /* transform: rotateZ(90deg); */
 }
-
-/* .addAStory:hover .addAStory::before{
-    visibility: visible;
-} */
 
 /* Styles for the Slideout menu links */
 
@@ -239,44 +204,26 @@ nav input[type="checkbox"]:checked + .slideOutForm{
 nav input[type="checkbox"] {
     visibility: hidden;
 }
-/* nav label[for="toggle"] {
-  
-}           */
+
 /* End of hamburger menu section */
 
 h1{
-    /* color: var(--dreamGreen); */
-    /* color: var(--oceanBlue); */
     color: var(--paleMoon);
-    /* color: var(--sandyGreen); */
     padding: 30px 0px;
     margin: 0;
     font-weight: 200;
     font-family: 'Sacramento', cursive;
     font-size: 5rem;
     text-align: left;
-    /* transition: 0.7s all ease; */
 }
-
-/* h1:hover{
-    color: var(--sandyGreen);
-} */
 
 h2{
     font-size: 2rem;
-    /* padding: 0 0 10px 0; */
-    /* font-family: 'Comfortaa', cursive; */
-    /* font-family: 'Caveat', cursive; */
-    /* font-family: 'Fredoka One', cursive; */
-    /* font-family: 'Bebas Neue', cursive; */
     font-family: 'Quicksand', sans-serif;
     font-weight: 300;
 }
 
 h3{
-    /* color: var(--sandyGreen); */
-    /* color: var(--sandyGreen); */
-
     font-weight: 200;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
@@ -291,7 +238,6 @@ footer{
 footer h3{
     text-align: right;
     /* padding: 25px 0px; */
-
 }
 
 /* General anchor tag formatting */
@@ -438,29 +384,6 @@ footer a:hover{
     border-bottom-color: var(--slateGrey);
 }
 
-
-/* *****************IMPORTANT TO REPLICATE THIS "ACTIVE" BEHAVIOUR USING JS */
-/* Set article to 100% width and height on hover for ease of reading */
-/* Set this to the the on-click property in JS later*/
-/* Plus add wrapper classlist when active.  Remove when inactive */
-/* li:active{
-    
-    cursor: pointer;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    flex: 0 0 100%;
-    overflow: auto;
-    opacity: 1;
-    z-index: 100;
-} */
-
-
-/* .allStories article:active .allStories{
-    overflow-y: hidden;
-} */
-
-
 .fullStory{
     padding: 12px 0;
 }
@@ -506,27 +429,17 @@ footer a:hover{
     color: var(--dreamPink);
 }
 
+/* Media Queries */
 
-/* .starLogo:hover{
-    color: var(--mustard);
+@media(max-width: 800px){
+    .wrapper{
+        width: 100%;
+    }
+
+    header, 
+    footer h3{
+        width: 90%;
+        margin: 0 auto;
+    }
 }
-
-
-.xLogo:hover{
-    color: var(--dreamPink);
-} */
-
-/* Hover state for star and x logos
-.starLogo:hover,
-.xLogo:hover{
-    
-} */
-
-/* Footer formatting */
-/* footer h3{
-    color: var(--mustard);
-    padding: 20px;
-    text-align: center;
-} */
-
 

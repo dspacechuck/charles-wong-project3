@@ -1,124 +1,81 @@
 // EachStory.js
-// Stores the component for each story that is rendered on the page.
-import reactDom from 'react-dom';
+// Component to store details of each story that is rendered on the page.
 import React from 'react';
 import './styles.css';
-
 import { useState, useEffect } from 'react';
 
 const EachStory = (props) => {
     const { updateVote } = props;
-    // const selectedStory = document.querySelector('li');
-    // const selectedStory = document.querySelector('li');
-    // const selectedStoryInner = document.querySelector('article');
 
     // Initialize useState hook to get and set maximized state of a story
     const [maxStory, setMaxStory] = useState(false);
-    // const [latestNumLikes, setLatestNumLikes] = useState(0);
 
-
+    // This hook is only used to check the state of maxStory accurately (due to async function)
     useEffect(() => {
-        // setMaxStory(true);
-        // Accurately tracks the current state of maxStory useState so its state can be printed
         console.log(maxStory);
 
     }, [maxStory]);
 
-    // Function to handle adding/removing a like
+    // Function to handle adding/removing a like, including toggling between voted/non-voted color styling on the star
     const handleLikeVoteFunction = (e) => {
 
         console.log(e);
-
         console.log(e.target.classList.length);
 
         // If the logo's color is not set, upvote the story
         if (e.target.classList.length === 1) {
-            console.log("This logo's color was not set");
-            // Set color to mustard
-            // elColor = "var(--mustard)";
-            // Vote = numLikes++
-            // updatedValue = props.storyObj.numLikes + 1;
             updateVote(props.storyObj.firebaseKey, props.localIndex, "numLikes", props.storyObj.numLikes + 1);
         }
         // If the target's color is already set (only possible from previous clicks), then decrenent the like count
         else {
-            console.log("This logo's color was previously set");
-            // Set color to var(--white)
-            // elColor = "var(--white)"
-            // Vote = numLikes--
             updateVote(props.storyObj.firebaseKey, props.localIndex, "numLikes", props.storyObj.numLikes - 1);
         }
-
         // Toggle the star's color 
         e.target.classList.toggle("starClicked");
-        // setLatestNumLikes(props.storyObj.numLikes - 1);
-
     }
 
-    // Function to handle adding/removing a dislike
+    // Function to handle adding/removing a dislike, including toggling between voted/non-voted color styling on the x
     const handleDislikeVoteFunction = (e) => {
 
         console.log(props.storyObj);
-
         console.log(e);
-
-
 
         // If the logo's color is not set, upvote the story
         if (e.target.classList.length === 1) {
-            console.log("This logo's color was not set");
             updateVote(props.storyObj.firebaseKey, props.localIndex, "numDislikes", props.storyObj.numDislikes + 1);
         }
         // If the target's color is already set (only possible from previous clicks), then decrenent the like count
         else {
-            console.log("This logo's color was previously set");
             updateVote(props.storyObj.firebaseKey, props.localIndex, "numDislikes", props.storyObj.numDislikes - 1);
         }
 
         // Toggle the x's color 
         e.target.classList.toggle("xClicked");
-
-
     }
 
-
-
-    // Function to maximize each story upon clicking on it
+    // Function to maximize each story upon clicking on it, including adding a wrapper and updating the state of the maxStory array (useState)
     const handleMaximizeStory = (e) => {
-        // setMaxStory(true);
-        console.log("maximized Story clicked");
+
         setMaxStory(true);
 
         const selectedStory = e.target.parentNode;
         const selectedStoryInner = e.target.parentNode.childNodes[0];
 
-        console.log(e.target);
+        selectedStory.classList.toggle("activeLi");
+        selectedStoryInner.classList.toggle("wrapper");
+    }
+
+    // Function to minimize each story upon clickin on the minimize button, including removing the wrapper on it and updating the state of the maxStory array (useState)
+    const handleMinimizeStory = (e) => {
+
+        setMaxStory(false);
+
+        const selectedStory = e.target.parentNode.parentNode.parentNode;
+        const selectedStoryInner = e.target.parentNode.parentNode;
 
         selectedStory.classList.toggle("activeLi");
         selectedStoryInner.classList.toggle("wrapper");
-
-
     }
-
-    // Function to minimize each story upon clickin on the minimize button
-    const handleMinimizeStory = (e) => {
-        console.log("minimze Story clicked");
-        setMaxStory(false);
-        console.log(e.target);
-        e.target.parentNode.parentNode.parentNode.classList.toggle("activeLi");
-        e.target.parentNode.parentNode.classList.toggle("wrapper");
-    }
-
-    // const handleLikesDislikesClick = (e, fireBaseKey, uniqueIndex, isLikes = true) => {
-
-
-
-
-
-    //   }
-
-
-
 
     return (
 
@@ -130,7 +87,6 @@ const EachStory = (props) => {
                         ? <div className="titleBar">
                             <button className="minimizeBtn" onClick={(event) => { handleMinimizeStory(event) }}>x</button>
                         </div>
-
                         : null
                 }
                 <div className="stats">
@@ -160,8 +116,6 @@ const EachStory = (props) => {
             }
 
         </li>
-
-
 
     )
 

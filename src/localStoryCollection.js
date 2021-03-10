@@ -1,11 +1,9 @@
 // localStoryCollection.js
-// stores localized copy of firebase database of stories
+// Creates localized copy of firebase database of stories
 
 const localStoryCollection = (firebaseStoryData) => {
     // Create a storyCollection variable that will store all stories locally (for processing later)
     const storyCollection = [];
-
-
 
     for (let storyKey in firebaseStoryData) {
         storyCollection.push({
@@ -20,11 +18,6 @@ const localStoryCollection = (firebaseStoryData) => {
     }
 
     return storyCollection;
-
-
-
-
-
 
 }
 

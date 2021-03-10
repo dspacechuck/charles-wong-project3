@@ -1,10 +1,10 @@
 // UserStoryForm.js
-import reactDom from 'react-dom';
+// Component for "Add a new story" form and all relevant functions
 import './styles.css';
 import firebase from './firebase.js';
 import { useState, useEffect } from 'react';
 
-const AddAStoryForm = (props) => {
+const AddAStoryForm = () => {
 
     // Create a class object to store the current story and its properties
     class storyObj {
@@ -34,22 +34,23 @@ const AddAStoryForm = (props) => {
     const [formSubmitState, setFormSubmitState] = useState(false);
 
     // Cache html elements on page
-    const slideOutForm = document.querySelector('.slideOutForm');
+    // const slideOutForm = document.querySelector('.slideOutForm');
     const navCheckBox = document.querySelector('nav input[type="checkbox"]');
-    const input = document.querySelector('input');
-    const textArea = document.querySelector('textarea');
-    const submitBtn = document.querySelector('button[type=submit]');
-    // const textAreaBorColor = document.querySelector('textarea').style.borderColor;
+    // const input = document.querySelector('input');
+    // const textArea = document.querySelector('textarea');
+    // const submitBtn = document.querySelector('button[type=submit]');
 
     // Initialize useEffect hook to track all changes to myForm useState
     useEffect(() => {
 
     }, [formSubmitState]);
 
+    // Event handler for tracking change in story title
     const handleTitleChange = (event) => {
         setStoryTitle(event.target.value);
     }
 
+    // Event handler for change in textarea content
     const handleTextChange = (event) => {
         setStoryText(event.target.value);
     }
@@ -61,27 +62,15 @@ const AddAStoryForm = (props) => {
 
     // Define form handleSubmit handler
     const handleSubmit = (event) => {
-        // Prevent default behaviour of the form (page refresh)
         event.preventDefault();
-        console.log("submit click detected");
 
         // Set the form's submitted state to true
         setFormSubmitState(true);
 
-        console.log(document.querySelector('form'));
-
         // Create a new story using the storyObj class
         const createStory = new storyObj(storyTitle, storyText);
-        console.log(createStory);
 
-        console.log(props);
-        console.log(storyTitle);
-        console.log(storyTitle.length);
-
-        console.log(storyText);
-        console.log(storyText.length);
-
-        // // Push the new story as an storyObj to our firebase database
+        // Push the new story as an storyObj to our firebase database
         dbRef.push(createStory);
 
         // Reset storyTitle and storyText states (and binded fields) to empty
@@ -94,9 +83,9 @@ const AddAStoryForm = (props) => {
         }, 1500)
 
         setTimeout(() => {
+            // Set the form's submit state to false
             setFormSubmitState(false);
         }, 2000);
-
     }
 
     return (
@@ -115,14 +104,9 @@ const AddAStoryForm = (props) => {
 
                         <button type="submit">Post It!</button>
                     </form>
-
-
-
             }
-
         </div>
     )
-
 }
 
 export default AddAStoryForm;
