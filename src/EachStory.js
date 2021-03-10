@@ -10,9 +10,34 @@ const EachStory = (props) => {
     // Initialize useState hook to get and set maximized state of a story
     const [maxStory, setMaxStory] = useState(false);
 
+    // Tracks status of star and x icons (if they have been upvoted or not in the current session, and the associated event object that triggered it)
+    const [starUp, setStarUp] = useState([false, null]);
+    const [xUp, setXUp] = useState([false, null]);
+
+
+    useEffect(() => {
+        console.log(starUp[0], starUp[1]);
+        // If star has been clicked, turn off the X icon
+        // starUp[0]
+        //     ? starUp[1].target.parentNode.parentNode.parentNode.childNodes[0].childNodes[1].childNodes[0].classList.toggle()
+        //     : console.log("turn ON X")
+
+
+    }, [starUp]);
+
+    useEffect(() => {
+        console.log(xUp[0], xUp[1]);
+        // If star has been clicked, turn off the X icon
+        // xUp
+        //     ? e.target.parentNode.parentNode.childNodes[0].childNodes[0].innerText = "starOff"
+        //     : console.log("turn ON star")
+
+
+    }, [xUp]);
+
     // This hook is only used to check the state of maxStory accurately (due to async function)
     useEffect(() => {
-        console.log(maxStory);
+        // console.log(maxStory);
 
     }, [maxStory]);
 
@@ -32,6 +57,10 @@ const EachStory = (props) => {
         }
         // Toggle the star's color 
         e.target.classList.toggle("starClicked");
+
+        // Toggles upvoted state of star and pass in the event that triggered it
+        setStarUp([!starUp[0], e]);
+
     }
 
     // Function to handle adding/removing a dislike, including toggling between voted/non-voted color styling on the x
@@ -51,6 +80,10 @@ const EachStory = (props) => {
 
         // Toggle the x's color 
         e.target.classList.toggle("xClicked");
+
+        // Toggles upvoted state of X and pass in the event that triggered it
+        setXUp([!xUp[0], e]);
+
     }
 
     // Function to maximize each story upon clicking on it, including adding a wrapper and updating the state of the maxStory array (useState)
@@ -91,11 +124,11 @@ const EachStory = (props) => {
                 }
                 <div className="stats">
                     <div className="star">
-                        <span className="starLogo" onClick={(event) => { handleLikeVoteFunction(event) }}>★</span>
+                        <button className="starLogo" disabled={xUp[0]} onClick={(event) => { handleLikeVoteFunction(event) }}>★</button>
                         <span className="likesCount">{props.storyObj.numLikes}</span>
                     </div>
                     <div className="dislikes">
-                        <span className="xLogo" onClick={(event) => { handleDislikeVoteFunction(event) }}>x</span>
+                        <button className="xLogo" disabled={starUp[0]} onClick={(event) => { handleDislikeVoteFunction(event) }}>x</button>
                         <span className="dislikesCount">{props.storyObj.numDislikes}</span>
                     </div>
                 </div>

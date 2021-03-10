@@ -408,14 +408,23 @@ footer a:hover{
 .starLogo, .xLogo{
     font-size: 2rem;
     opacity: 0.8;
+    color: var(--white);
+    background: transparent;
+    border: none;
+    outline: none;
 }
 
 /* Hover state for star log0 and x logo */
+.starLogo:active,
+.xLogo:active,
 .starLogo:hover, 
 .xLogo:hover{
     /* font-size: 1.8rem; */
     transition: 0.7s all ease;
     cursor: pointer;
+    outline: none;
+    /* border: none; */
+    box-shadow: none;
 }
 
 /* Clicked color for star (for React to toggle) */
