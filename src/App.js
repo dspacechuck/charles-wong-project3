@@ -2,15 +2,23 @@
 import './styles.css';
 import React from 'react';
 import firebase from './firebase.js';
+// import LocalStoryStore from './LocalStoryStore.js';
+import localStoryCollection from './localStoryCollection.js';
 import AddAStoryForm from './AddAStoryForm.js';
 import EachStory from './EachStory.js';
 import Footer from './Footer.js';
 import { useState, useEffect } from 'react';
 
 function App() {
+  // const [setLatestNumLikes] = props;
+
+  // Initialize firebase.on() method to obtain latest copy of firebase database of stories.  Also copy all stories into a localized array.
+  // LocalStoryStore();
 
   // retrieve stories from firebase and save them locally for processing
   // updates our local stories array when there are any changes to the firebase database
+
+
   // Initialize useState for our array of stories
   const [storyArray, setStoryArray] = useState([]);
 
@@ -24,89 +32,107 @@ function App() {
     dbRef.on('value', (data) => {
 
       // cache the firebase object in a variable named storyData
-      const storyData = data.val();
+      const latestFirebaseData = data.val();
+      console.log(latestFirebaseData);
 
-      // Create a storyCollection variable that will store all stories locally (for processing later)
-      const storyCollection = [];
 
-      for (let storyKey in storyData) {
-        storyCollection.push({
-          firebaseKey: storyKey,
-          title: storyData[storyKey].title,
-          text: storyData[storyKey].text,
-          anonAuthor: storyData[storyKey].anonAuthor,
-          bgCol: storyData[storyKey].bgCol,
-          numLikes: storyData[storyKey].numLikes,
-          numDislikes: storyData[storyKey].numDislikes
-        });
-      }
+      // // Create a storyCollection variable that will store all stories locally (for processing later)
+      // const storyCollection = [];
 
-      // Log out the storyCollection object to see what's in our firebase database
-      console.log(storyCollection);
+      // for (let storyKey in storyData) {
+      //   storyCollection.push({
+      //     firebaseKey: storyKey,
+      //     title: storyData[storyKey].title,
+      //     text: storyData[storyKey].text,
+      //     anonAuthor: storyData[storyKey].anonAuthor,
+      //     bgCol: storyData[storyKey].bgCol,
+      //     numLikes: storyData[storyKey].numLikes,
+      //     numDislikes: storyData[storyKey].numDislikes
+      //   });
+      // }
 
-      // Push the our story collection obtained from firebase into our local array "storyCollection"
-      setStoryArray(storyCollection);
+      // console.log(localStoryCollection(storyData));
+
+
+      // // Log out the storyCollection object to see what's in our firebase database
+      // console.log(storyCollection);
+
+      // // Push the our story collection obtained from firebase into our local array "storyCollection"
+
+      // Call the localStoryCollection function (outside of App.js) and pass in the current firebase database stories to it.  We then take the return (a localized version of the firebase database) and set it to our useState
+      setStoryArray(localStoryCollection(latestFirebaseData));
+
+      // Log out the localized version of the array given to us back from the localStoryCollection() function
+      setTimeout(() => {
+        console.log(storyArray);
+      }, 1000)
+
 
     })
 
   }, []);
 
+
+  // Copy this below function later----------------------
   // Function to handle likes click
-  const handleLikesDislikesClick = (e, fireBaseKey, uniqueIndex, isLikes = true) => {
-    // console.log("event", event);
+  // const handleLikesDislikesClick = (e, fireBaseKey, uniqueIndex, isLikes = true) => {
+  //   console.log("event", e);
+  //   console.log("fireBaseKey", fireBaseKey);
+  //   console.log("unique Index", uniqueIndex);
 
-    // Cache our firebase database reference within a variable
+
+  //   // Cache our firebase database reference within a variable
+  //   const dbRef = firebase.database().ref();
+  //   console.log("likes/dislikes clicked");
+
+
+  //   // create a copy of the story array while performing operations on it
+  //   const copyOfStoryArray = [...storyArray];
+
+  //   // increase the likes or dislikes count on the specific story whose star or x was clicked on accordingly
+  //   if (isLikes) {
+  //     copyOfStoryArray[uniqueIndex].numLikes++;
+  //   } else {
+  //     copyOfStoryArray[uniqueIndex].numDislikes++;
+  //   }
+
+  //   console.log(copyOfStoryArray[uniqueIndex]);
+
+  //   // Update the storyArray state with this new array where the star was clicked on for the story of interest
+  //   setStoryArray(copyOfStoryArray);
+
+  //   // Update only the current index in firebase with the corresponding local index in copyOfStoryArray 
+  //   dbRef.child(fireBaseKey).set(copyOfStoryArray[uniqueIndex]);
+
+  //   // Log out the updated index in our firebase database
+  //   console.log(dbRef.child(fireBaseKey));
+
+
+
+
+  // }
+
+  // Function to update the upvote or downvote (like or dislike) on a story
+  const updateVote = (uniqueKey, localArrIndex, propToUpdate, newValue) => {
+    console.log(uniqueKey, propToUpdate, newValue);
+
     const dbRef = firebase.database().ref();
-    console.log("likes/dislikes clicked");
-
-    // create a copy of the story array while performing operations on it
     const copyOfStoryArray = [...storyArray];
 
-    // increase the likes or dislikes count on the specific story whose star or x was clicked on accordingly
-    if (isLikes) {
-      copyOfStoryArray[uniqueIndex].numLikes++;
+    if (propToUpdate === "numLikes") {
+      copyOfStoryArray[localArrIndex].numLikes = newValue;
     } else {
-      copyOfStoryArray[uniqueIndex].numDislikes++;
+      copyOfStoryArray[localArrIndex].numDislikes = newValue;
     }
 
-    console.log(copyOfStoryArray[uniqueIndex]);
-
-    // Update the storyArray state with this new array where the star was clicked on for the story of interest
     setStoryArray(copyOfStoryArray);
 
     // Update only the current index in firebase with the corresponding local index in copyOfStoryArray 
-    dbRef.child(fireBaseKey).set(copyOfStoryArray[uniqueIndex]);
-
-    // Log out the updated index in our firebase database
-    console.log(dbRef.child(fireBaseKey));
-
-    // EachStory.disableIcon(e);
-
-    // // Helper function to disable clicked icon for currrent session (prevents multiple up or downvotes)
-    // const disableIcon = () => {
-    //   console.log(e.target);
-    //   if (isLikes) {
-    //     e.target.style.color = "var(--mustard)";
-    //   } else {
-    //     e.target.style.color = "var(--dreamPink)";
-    //   }   
-    // }
-
-    // // Invoke the helper function to disable the clicked-on icon
-    // disableIcon();
+    dbRef.child(uniqueKey).set(copyOfStoryArray[localArrIndex]);
 
   }
 
-  // const handleFormSubmitted = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form submitted", e);
-  // }
 
-  // Function to disable the current likes or dislikes icon after clicking on them
-  // const handleIconClick = (e) => {
-  //   console.log("event", e);
-  //   console.log("icon click");
-  // }
 
   return (
     <main className="App">
@@ -120,40 +146,46 @@ function App() {
               </label>
               <input type="checkbox" id="toggle" name="toggle" />
 
-              {/* <div className="slideOutForm"> */}
               <AddAStoryForm />
 
-              {/* </div> */}
 
             </nav>
           </header>
         </div>
+        {/* <section className="allStories">
+          <ul className="allStoriesSubContainer">
+              {storyArray.map((storyObj, storyIndex) => {
+              return (
+                <EachStory
+                  story={storyObj}
+                />
+              )
+            })}
+          </ul>
+        </section> */}
+
+        {/* Map through our local storyArray obtained from firebase and render one <EachStory /> component per story on the page */}
+        {/*Pass each storyObj's properties as props into the EachStory component before receiving a formatted story to be rendered in our allStoriesSubContainer*/}
         <section className="allStories">
           <ul className="allStoriesSubContainer">
-            {/* Map through our local storyArray obtained from firebase and render one <EachStory /> component per story on the page */}
-            {/*Pass each storyObj's properties as props into the EachStory component before receiving a formatted story to be rendered in our allStoriesSubContainer*/}
+
             {storyArray.map((storyObj, storyIndex) => {
               return (
                 <EachStory
                   key={storyObj.firebaseKey}
-                  title={storyObj.title}
-                  text={storyObj.text}
-                  likesCount={storyObj.numLikes}
-                  dislikesCount={storyObj.numDislikes}
-                  increaseLikesFunction={(event) => {
-                    handleLikesDislikesClick(event, storyObj.firebaseKey, storyIndex, true)
+                  localIndex={storyIndex}
+                  storyObj={storyObj}
+                  updateVote={updateVote}
 
-                  }}
-                  increaseDislikesFunction={(event) => {
-                    handleLikesDislikesClick(event, storyObj.firebaseKey, storyIndex, false)
-                  }}
-                // maximizeStory={(event) => {
-                //   handleMaxStory(event, storyObj.firebaseKey, storyIndex)
+                // increaseDislikesFunction={(event) => {
+                //   handleLikesDislikesClick(event, fireBaseKey, uniqueIndex, false)
                 // }}
 
                 />
               )
             })}
+
+
           </ul>
         </section>
       </div>

@@ -24,6 +24,7 @@ html{
     
 
     /* Using this palette */
+    --white: #FFFFFF;
     --paleMoon: #BAC1C0;
     --sandyGreen: #66879E;
     --oceanBlue: #0C549A;
@@ -52,7 +53,7 @@ body{
     /* font-family: Arial, Helvetica, sans-serif; */
     font-family: 'Quicksand', sans-serif;
     font-size: 62.5%;
-    color: white;
+    color: var(--white);
     height: 100vh;
 }
 
@@ -372,7 +373,7 @@ footer a:hover{
     bottom: 0;
     left: 0;
     background: var(--mustard);
-    color: white;
+    color: var(--white);
     font-size: 1.3rem;
     font-family: 'Quicksand', sans-serif;
     transition: 1s all ease;
@@ -483,6 +484,7 @@ footer a:hover{
 
 .starLogo, .xLogo{
     font-size: 2rem;
+    opacity: 0.8;
 }
 
 /* Hover state for star log0 and x logo */
@@ -493,15 +495,32 @@ footer a:hover{
     cursor: pointer;
 }
 
-/* Hover state colour for star logo */
-.starLogo:hover{
+/* Clicked color for star (for React to toggle) */
+.starClicked{
+    color: var(--mustard);
+    opacity: 1;
+}
+
+/* Clicked color for x (for React to toggle) */
+.xClicked{
+    color: var(--dreamPink);
+}
+
+
+/* .starLogo:hover{
     color: var(--mustard);
 }
 
-/* Hover state colour for x logo */
+
 .xLogo:hover{
     color: var(--dreamPink);
-}
+} */
+
+/* Hover state for star and x logos
+.starLogo:hover,
+.xLogo:hover{
+    
+} */
 
 /* Footer formatting */
 /* footer h3{
