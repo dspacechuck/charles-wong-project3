@@ -95,7 +95,7 @@ const AddAStoryForm = () => {
                 formSubmitState
                     ? <h2 className="submitSuccessful">Thank you for submitting your story!</h2>
                     : <form action="#" method="#"
-                        onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm wrapper">
+                        onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm altWrapper">
                         <label htmlFor="storyTitle" className="sr-only">Title</label>
                         <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle}></input>
 

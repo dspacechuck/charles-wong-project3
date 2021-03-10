@@ -60,6 +60,13 @@ body{
     margin: 0 auto;
 }
 
+/* Wrapper to constraint add/read story content */
+.altWrapper{
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
 /* Header properties (includes H1 and "Add a story" button" */
 header{
     display: flex;
@@ -402,7 +409,9 @@ footer a:hover{
 .star,
 .dislikes{
     /* padding-top: 12px; */
-    padding: 7px 30px 12px 0;
+    /* padding: 7px 30px 12px 0; */
+    padding: 7px 0 12px;
+    width:95px;
 }
 
 .starLogo, .xLogo{
@@ -412,6 +421,7 @@ footer a:hover{
     background: transparent;
     border: none;
     outline: none;
+    box-shadow: none;
 }
 
 /* Hover state for star log0 and x logo */
@@ -422,9 +432,9 @@ footer a:hover{
     /* font-size: 1.8rem; */
     transition: 0.7s all ease;
     cursor: pointer;
-    outline: none;
+    transform: none;
     /* border: none; */
-    box-shadow: none;
+    
 }
 
 /* Clicked color for star (for React to toggle) */

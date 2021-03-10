@@ -14,6 +14,10 @@ const EachStory = (props) => {
     const [starUp, setStarUp] = useState([false, null]);
     const [xUp, setXUp] = useState([false, null]);
 
+    // Tracks color of star and x icons
+    const [starCol, setStarCol] = useState();
+    const [xCol, setXCol] = useState();
+
 
     useEffect(() => {
         console.log(starUp[0], starUp[1]);
@@ -22,6 +26,9 @@ const EachStory = (props) => {
         //     ? starUp[1].target.parentNode.parentNode.parentNode.childNodes[0].childNodes[1].childNodes[0].classList.toggle()
         //     : console.log("turn ON X")
 
+        // console.log(xCol);
+
+        // setXCol("black")
 
     }, [starUp]);
 
@@ -95,7 +102,7 @@ const EachStory = (props) => {
         const selectedStoryInner = e.target.parentNode.childNodes[0];
 
         selectedStory.classList.toggle("activeLi");
-        selectedStoryInner.classList.toggle("wrapper");
+        selectedStoryInner.classList.toggle("altWrapper");
     }
 
     // Function to minimize each story upon clickin on the minimize button, including removing the wrapper on it and updating the state of the maxStory array (useState)
@@ -107,7 +114,7 @@ const EachStory = (props) => {
         const selectedStoryInner = e.target.parentNode.parentNode;
 
         selectedStory.classList.toggle("activeLi");
-        selectedStoryInner.classList.toggle("wrapper");
+        selectedStoryInner.classList.toggle("altWrapper");
     }
 
     return (
@@ -124,11 +131,11 @@ const EachStory = (props) => {
                 }
                 <div className="stats">
                     <div className="star">
-                        <button className="starLogo" disabled={xUp[0]} onClick={(event) => { handleLikeVoteFunction(event) }}>★</button>
+                        <button className="starLogo" style={{ color: starCol }} disabled={xUp[0]} onClick={(event) => { handleLikeVoteFunction(event) }}>★</button>
                         <span className="likesCount">{props.storyObj.numLikes}</span>
                     </div>
                     <div className="dislikes">
-                        <button className="xLogo" disabled={starUp[0]} onClick={(event) => { handleDislikeVoteFunction(event) }}>x</button>
+                        <button className="xLogo" style={{ color: starCol }} disabled={starUp[0]} onClick={(event) => { handleDislikeVoteFunction(event) }}>x</button>
                         <span className="dislikesCount">{props.storyObj.numDislikes}</span>
                     </div>
                 </div>
