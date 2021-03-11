@@ -17,28 +17,12 @@ function App() {
     // Cache our firebase database reference within a variable
     const dbRef = firebase.database().ref();
 
-    // const topPosts = dbRef.orderByChild('numLikes');
-
     // Turn on firebase event listener using .on() method
     dbRef.on('value', (data) => {
 
       const latestFirebaseData = data.val();
       // Call the localStoryCollection function (outside of App.js) and pass in the current firebase database stories to it.  We then take the return (a localized version of the firebase database) and set it to our useState
       setStoryArray(localStoryCollection(latestFirebaseData));
-
-      console.log(latestFirebaseData);
-
-
-
-      // setTimeout(() => {
-      //   let newArray = [...storyArray];
-      //   console.log(newArray);
-      //   newArray.sort();
-      //   console.log(newArray);
-      // }, 1000)
-
-
-
 
     })
 
