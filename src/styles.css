@@ -110,10 +110,10 @@ ul{
 .slideOutForm button{
     background: var(--sandyGreen);
     margin-bottom: 15px;
-    border: none;
     border-radius: 7px;
     padding: 10px;
     box-shadow: none;
+    border: none;
 }
 
 .slideOutForm textarea{
@@ -143,7 +143,6 @@ ul{
 
 .slideOutForm:focus-within input:valid, 
 .slideOutForm:focus-within textarea:valid{
-    border-left: 15px solid var(--oceanBlue);
     outline:none;
     box-shadow: none;
 }
@@ -175,10 +174,13 @@ ul{
     color: var(--mustard);
     font-size: 5rem;
     transition: 0.7s all ease;
+    background: transparent;
+    border: none;
 }
 
 /* Hover State for "Add a Story" */
-.addAStory:hover{
+.addAStory:hover,
+.addAStory:focus{
     cursor: pointer;
     color: var(--dreamGreen);
 }
@@ -238,7 +240,8 @@ footer a{
 }
 
 /* Hover effects for anchor tag in the footer */
-footer a:hover{
+footer a:hover,
+footer a:focus{
     color: var(--paleMoon);
 }
 
@@ -389,13 +392,13 @@ li:hover .readMore{
 }
 
 /* Hover state for star logo and x logo */
-.starLogo:active,
-.xLogo:active,
+.starLogo:focus,
+.xLogo:focus,
 .starLogo:hover, 
 .xLogo:hover{
     transition: 0.7s all ease;
     cursor: pointer;
-    transform: none;
+    transform: scale(1.5);
 }
 
 /* Clicked color for star (for React to toggle) */
@@ -476,4 +479,14 @@ li:hover .readMore{
     }
 }
 
+@media(max-width: 500px){
+    /* .slideOutForm{
+        padding-bottom: 65px;
+    } */
+
+    .slideOutForm form{
+       padding: 15px;
+       margin-bottom: 65px;
+    }
+}
 

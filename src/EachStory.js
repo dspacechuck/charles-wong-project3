@@ -17,9 +17,6 @@ const EachStory = (props) => {
     // Function to handle adding/removing a like, including toggling between voted/non-voted color styling on the star
     const handleLikeVoteFunction = (e) => {
 
-        console.log(e);
-        console.log(e.target.classList.length);
-
         // If the logo's color is not set, upvote the story
         if (e.target.classList.length === 1) {
             updateVote(props.storyObj.firebaseKey, props.localIndex, "numLikes", props.storyObj.numLikes + 1);
@@ -38,9 +35,6 @@ const EachStory = (props) => {
 
     // Function to handle adding/removing a dislike, including toggling between voted/non-voted color styling on the x
     const handleDislikeVoteFunction = (e) => {
-
-        console.log(props.storyObj);
-        console.log(e);
 
         // If the logo's color is not set, upvote the story
         if (e.target.classList.length === 1) {

@@ -24,6 +24,8 @@ function App() {
       // Call the localStoryCollection function (outside of App.js) and pass in the current firebase database stories to it.  We then take the return (a localized version of the firebase database) and set it to our useState
       setStoryArray(localStoryCollection(latestFirebaseData));
 
+    }, (error) => {
+      alert("Error fetching stories. Please try again later.");
     })
 
   }, []);
