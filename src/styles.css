@@ -82,7 +82,6 @@ ul{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    z-index: 30;
     position: fixed;
     top: 150px;
     right: -100%;
@@ -143,6 +142,7 @@ ul{
 
 .slideOutForm:focus-within input:valid, 
 .slideOutForm:focus-within textarea:valid{
+    border-left: 15px solid var(--oceanBlue);
     outline:none;
     box-shadow: none;
 }
