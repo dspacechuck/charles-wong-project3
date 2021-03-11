@@ -1,8 +1,8 @@
 import './styles.css';
 import React from 'react';
 import firebase from './firebase.js';
+import Header from './Header.js';
 import localStoryCollection from './localStoryCollection.js';
-import AddAStoryForm from './AddAStoryForm.js';
 import EachStory from './EachStory.js';
 import Footer from './Footer.js';
 import { useState, useEffect } from 'react';
@@ -51,16 +51,7 @@ function App() {
     <main className="App">
       <div className="wrapper">
         <div className="dreamBoard">
-          <header>
-            <h1>dreamingly</h1>
-            <nav>
-              <label htmlFor="toggle">
-                <div className="addAStory">+</div>
-              </label>
-              <input type="checkbox" id="toggle" name="toggle" />
-              <AddAStoryForm />
-            </nav>
-          </header>
+          <Header />
         </div>
         {/* Map through our local storyArray obtained from firebase and render one <EachStory /> component per story on the page */}
         {/*Pass each storyObj's properties as props into the EachStory component before receiving a formatted story to be rendered in our allStoriesSubContainer*/}
