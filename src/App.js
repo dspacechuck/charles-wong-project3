@@ -19,7 +19,6 @@ function App() {
 
     // const topPosts = dbRef.orderByChild('numLikes');
 
-
     // Turn on firebase event listener using .on() method
     dbRef.on('value', (data) => {
 
@@ -42,9 +41,6 @@ function App() {
 
 
     })
-
-
-
 
   }, []);
 

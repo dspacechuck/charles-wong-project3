@@ -2,7 +2,7 @@
 // Component to store details of each story that is rendered on the page.
 import React from 'react';
 import './styles.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const EachStory = (props) => {
     const { updateVote } = props;
@@ -13,40 +13,6 @@ const EachStory = (props) => {
     // Tracks status of star and x icons (if they have been upvoted or not in the current session, and the associated event object that triggered it)
     const [starUp, setStarUp] = useState([false, null]);
     const [xUp, setXUp] = useState([false, null]);
-
-    // Tracks color of star and x icons
-    const [starCol, setStarCol] = useState();
-    const [xCol, setXCol] = useState();
-
-
-    useEffect(() => {
-        console.log(starUp[0], starUp[1]);
-        // If star has been clicked, turn off the X icon
-        // starUp[0]
-        //     ? starUp[1].target.parentNode.parentNode.parentNode.childNodes[0].childNodes[1].childNodes[0].classList.toggle()
-        //     : console.log("turn ON X")
-
-        // console.log(xCol);
-
-        // setXCol("black")
-
-    }, [starUp]);
-
-    useEffect(() => {
-        console.log(xUp[0], xUp[1]);
-        // If star has been clicked, turn off the X icon
-        // xUp
-        //     ? e.target.parentNode.parentNode.childNodes[0].childNodes[0].innerText = "starOff"
-        //     : console.log("turn ON star")
-
-
-    }, [xUp]);
-
-    // This hook is only used to check the state of maxStory accurately (due to async function)
-    useEffect(() => {
-        // console.log(maxStory);
-
-    }, [maxStory]);
 
     // Function to handle adding/removing a like, including toggling between voted/non-voted color styling on the star
     const handleLikeVoteFunction = (e) => {
@@ -103,6 +69,7 @@ const EachStory = (props) => {
 
         selectedStory.classList.toggle("activeLi");
         selectedStoryInner.classList.toggle("altWrapper");
+
     }
 
     // Function to minimize each story upon clickin on the minimize button, including removing the wrapper on it and updating the state of the maxStory array (useState)
@@ -131,11 +98,11 @@ const EachStory = (props) => {
                 }
                 <div className="stats">
                     <div className="star">
-                        <button className="starLogo" style={{ color: starCol }} disabled={xUp[0]} onClick={(event) => { handleLikeVoteFunction(event) }}>★</button>
+                        <button className="starLogo" disabled={xUp[0]} onClick={(event) => { handleLikeVoteFunction(event) }}>★</button>
                         <span className="likesCount">{props.storyObj.numLikes}</span>
                     </div>
                     <div className="dislikes">
-                        <button className="xLogo" style={{ color: starCol }} disabled={starUp[0]} onClick={(event) => { handleDislikeVoteFunction(event) }}>x</button>
+                        <button className="xLogo" disabled={starUp[0]} onClick={(event) => { handleDislikeVoteFunction(event) }}>x</button>
                         <span className="dislikesCount">{props.storyObj.numDislikes}</span>
                     </div>
                 </div>

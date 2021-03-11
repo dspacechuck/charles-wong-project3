@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 const AddAStoryForm = () => {
 
     // Create a class object to store the current story and its properties
+    // Additional properties specified for future scaling
     class storyObj {
         constructor(title, text) {
             this.title = title;
@@ -33,12 +34,8 @@ const AddAStoryForm = () => {
     // Initialize useState to track the form's state (submitted or not)
     const [formSubmitState, setFormSubmitState] = useState(false);
 
-    // Cache html elements on page
-    // const slideOutForm = document.querySelector('.slideOutForm');
+    // Cache nav checkbox element on page
     const navCheckBox = document.querySelector('nav input[type="checkbox"]');
-    // const input = document.querySelector('input');
-    // const textArea = document.querySelector('textarea');
-    // const submitBtn = document.querySelector('button[type=submit]');
 
     // Initialize useEffect hook to track all changes to myForm useState
     useEffect(() => {
@@ -91,7 +88,7 @@ const AddAStoryForm = () => {
     return (
         <div className="slideOutForm">
             {
-                // If the form has just been submitted (formSubmitState = true), show the user a Thank you message instead of a form
+                // If the form has just been submitted (formSubmitState = true), show the user a Thank You message instead of a form
                 formSubmitState
                     ? <h2 className="submitSuccessful">Thank you for submitting your story!</h2>
                     : <form action="#" method="#"
