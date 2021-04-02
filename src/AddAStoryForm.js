@@ -94,10 +94,10 @@ const AddAStoryForm = () => {
                     : <form action="#" method="#"
                         onSubmit={handleSubmit} name="addAStoryForm" className="addAStoryForm altWrapper">
                         <label htmlFor="storyTitle" className="sr-only">Title</label>
-                        <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle} minlength="1" maxlength="70"></input>
+                        <input type="text" id="storyTitle" name="storyTitle" placeholder="Your story's title" required={true} onChange={handleTitleChange} value={storyTitle} minLength="1" maxLength="70"></input>
 
                         <label htmlFor="yourStory" className="sr-only">Tell us your story below</label>
-                        <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" required={true} onChange={handleTextChange} value={storyText} minLength="10" maxlength="10000"></textarea>
+                        <textarea name="yourStory" id="yourStory" placeholder="Tell us your story" required={true} onChange={handleTextChange} value={storyText} minLength="10" maxLength="10000"></textarea>
 
                         <button type="submit">Post It!</button>
                     </form>

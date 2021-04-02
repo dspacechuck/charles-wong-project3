@@ -16,6 +16,7 @@ html{
     --paleMoon: #BAC1C0;
     --sandyGreen: #66879E;   
     --oceanBlue: #0C549A;
+    --deepPurple: #36079b;
     --twilightPurple: #28184C;
     --grey: #504d4d;
     --dreamPink: #a55c7a;
@@ -273,10 +274,11 @@ li{
     overflow: auto;
     font-size: 1.6rem;
     opacity: 0.85;
-    background: var(--grey);
-    box-shadow: 5px 0px var(--mustard);
+    background: var(--oceanBlue);
+    box-shadow: 5px 0px var(--deepPurple);
     overflow: hidden;
     transition: 0.7s opacity ease;
+    border-radius: 15px;
  }
 
 /* Additional properties for formatting the last story on the page */
