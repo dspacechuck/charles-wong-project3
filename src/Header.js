@@ -13,7 +13,6 @@ const Header = () => {
 
         if (formBtn === false) {
             addStoryBtn.textContent = '-';
-            console.log(addStoryBtn);
         } else {
             addStoryBtn.textContent = '+';
         }
